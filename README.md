@@ -1,3 +1,22 @@
+## Pre requisites:
+
+Node, npm
+
+## To run the project:
+
+1. Open terminal in the project directory and run:
+
+### `npm install`
+
+2. To start testing type:
+
+### `npm start`
+
+##
+## 
+## 
+## Below is the React official guide:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
