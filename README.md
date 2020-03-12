@@ -4,11 +4,13 @@ Node, npm
 
 ## To run the project:
 
-1. Open terminal in the project directory and run:
+1. Pull or download the project.
+
+2. Open terminal in the project directory and run:
 
 ### `npm install`
 
-2. To start testing type:
+3. To start testing type:
 
 ### `npm start`
 
