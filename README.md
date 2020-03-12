@@ -4,7 +4,7 @@ Node, npm
 
 ## To run the project:
 
-1. Pull or download the project.
+1. Clone or download the project.
 
 2. Open terminal in the project directory and run:
 
