@@ -17,7 +17,7 @@ Node, npm
 ##
 ## 
 ## 
-## Below is the React official guide:
+## Below is the React official guide, for reference:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
