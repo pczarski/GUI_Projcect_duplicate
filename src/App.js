@@ -1,18 +1,39 @@
 import React, { useState } from 'react';
 import './App.css';
+import { render } from '@testing-library/react';
+
+var today = new Date();
+var time = today.getHours() + ":" + "00";
+var breed = 'Golden Retreiver';
+var Window = "Weather";
+var location = "London";
 
 const api= {
-    apikey: "928d3716bf756a2b7ce8b6b6a49dfe38",
+    apikey: "d18728d560ba81dbe5edf3ca12e559f5",
     base: "https://api.openweathermap.org/data/2.5/"
 };
+
 
 function App() {
 
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
+    const [initial, setInitial] = useState("True");
+
+    if (initial === "True"){
+        setInitial("False")
+        fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.apikey}`)
+                .then(res => res.json())
+                .then(result => {
+                    setWeather(result);
+                    setQuery('');
+                    console.log(result);
+                });
+    }
 
     const search = evt => {
         if (evt.key === "Enter") {
+            location = query;
             fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.apikey}`)
                 .then(res => res.json())
                 .then(result => {
@@ -23,22 +44,29 @@ function App() {
         }
     };
 
+    const ChangeBreed = evt =>{
+        if(Window === "Weather"){
+            Window = "DogBreed";
+        }else{
+            Window = "Weather";
+        }
+        fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.apikey}`)
+                .then(res => res.json())
+                .then(result => {
+                    setWeather(result);
+                    setQuery('');
+                    console.log(result);
+                });
+        
 
-    // returns current date
-    const dateBuilder = (d) => {
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-        let day = days[d.getDay()];
-        let date = d.getDate();
-        let month = months[d.getMonth()];
-        let year = d.getFullYear();
-
-        return `${day} ${date} ${month} ${year}`
     };
 
-    // if search is undefined = App, if search > 16 degrees = clearsky background
+
+
+
+    if(Window === "Weather"){
     return (
+        
         <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
             <main>
                 <div className="search-box">
@@ -55,7 +83,7 @@ function App() {
                     <div>
                         <div className="location-box">
                             <div className="location">{weather.name}, {weather.sys.country}</div>
-                            <div className="date">{dateBuilder(new Date())}</div>
+                            <div className="date">{today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()}</div>
                         </div>
                         <div className="weather-box">
                             <div className="temp">
@@ -64,10 +92,44 @@ function App() {
                             <div className="weather">{weather.weather[0].main}</div>
                         </div>
                     </div>
+                    
                 ) : ("")}
+
+                    
+                <div>
+                <div className="weather-box">
+                        <div className="dog-box">
+                            Your Breed: {breed}
+                        </div>
+                        <div>
+                        <button type="button" onClick={ChangeBreed} className="Button">Change Breed</button>
+                        </div>
+                    </div>
+                </div>
+                        
+                    
             </main>
         </div>
     );
+    }else{
+        return(
+            <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
+            <main>
+            <div>
+            <div className="location"> Your Selected Breed: </div>
+                <div className="weather-box">
+                        <div className="dog-box">
+                             {breed}
+                        </div>
+                        <div>
+                    </div>
+                </div>
+                <button type="button" onClick={ChangeBreed} className="Button">Go Back</button>
+            </div>
+            </main>
+            </div>
+        );
+    }
 }
 
 export default App;
