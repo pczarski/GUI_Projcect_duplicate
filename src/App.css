@@ -123,7 +123,7 @@ main {
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
 .Button{
-  position:relative;
+  align-self: center;
   text-align: center;
   display: inline-block;
   margin: 30px auto;
@@ -135,4 +135,12 @@ main {
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
   text-align: center;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.title{
+  text-align: center;
+  color: #FFF;
+  font-size: 20px;
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
 }

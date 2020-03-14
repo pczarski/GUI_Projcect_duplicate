@@ -7,6 +7,7 @@ var time = today.getHours() + ":" + "00";
 var breed = 'Golden Retreiver';
 var Window = "Weather";
 var location = "London";
+var Size = "Large";
 
 const api= {
     apikey: "d18728d560ba81dbe5edf3ca12e559f5",
@@ -19,6 +20,7 @@ function App() {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
     const [initial, setInitial] = useState("True");
+    
 
     if (initial === "True"){
         setInitial("False")
@@ -44,6 +46,12 @@ function App() {
         }
     };
 
+    const Select = evt => {
+        var e = document.getElementById("dropdown");
+        breed = e.options[e.selectedIndex].text;
+        Size = e.options[e.selectedIndex].value;
+    };
+
     const ChangeBreed = evt =>{
         if(Window === "Weather"){
             Window = "DogBreed";
@@ -66,7 +74,6 @@ function App() {
 
     if(Window === "Weather"){
     return (
-        
         <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
             <main>
                 <div className="search-box">
@@ -113,18 +120,29 @@ function App() {
     );
     }else{
         return(
+            
             <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
             <main>
             <div>
-            <div className="location"> Your Selected Breed: </div>
+            <div className="title"> Your Selected Breed: </div>
                 <div className="weather-box">
                         <div className="dog-box">
-                             {breed}
+                        <div >
+                            <label >Select your breed: </label>
+                            <select  onChange={Select} id="dropdown" className="Select" >
+                                <option value="Large">Golden Retriver</option>
+                                <option value="Large">German Sheapord</option>
+                                <option value="Small">Pug</option>
+                                <option value="Medium">Beagle</option>
+                                <option value="Small">Pomeranian</option>
+                            </select>
+                        </div>
                         </div>
                         <div>
                     </div>
                 </div>
-                <button type="button" onClick={ChangeBreed} className="Button">Go Back</button>
+                <div className="invisBox"><button type="button" onClick={ChangeBreed} className="Button">Go Back</button></div>
+                <div ></div>
             </div>
             </main>
             </div>
