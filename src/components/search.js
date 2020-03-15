@@ -5,7 +5,7 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: "London",
+            query: "",
         };
     }
 
@@ -27,12 +27,12 @@ export default class Search extends React.Component {
                         ref = "searchField"
                         type = "text"
                         className="search-bar"
-                        placeholder="Set Location..."
+                        placeholder="Enter text..."
                         onChange={(e) => this.updateQuery(e)}
                         value={this.state.query}
                     />
                     <button type="button" onClick = {() => this.sendQuery()}>
-                        Set New Location
+                        submit
                     </button>
                 </form>
 

@@ -3,22 +3,23 @@ import $ from 'jquery';
 import WeatherHome from "./components/weather_home";
 import './App.css';
 import Search from "./components/search";
+import {Link} from 'react-router-dom';
 
 const api= {
     apikey: "5890b051c398fd53af1e1a449157b1de",
     base: "https://api.openweathermap.org/data/2.5/weather?q="
 };
 
-var count = 0;
+var count = 30;
 
 
-export default class App2 extends React.Component {
+export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             location: "London", // by default the location is London
-            breed: null, // by default breed and size is not selected
+            //   breed: null, // by default breed and size is not selected
             size: null,
             temp: null,
             conditions: "Cloudy",
@@ -76,26 +77,23 @@ export default class App2 extends React.Component {
         );
     };
 
-    renderSearch() {
-
-        return (
-            <Search
-                onSubmit={this.changeLocation}
-            />
-
-        );
-    }
-
     render() {
-        console.log('rendering app2');
+        console.log('rendering app2 ' + this.props.breed);
         console.log(this.state.weather);
         console.log(this.state);
         return (
-            <div>
-                {this.renderSearch()}
-                {this.renderWeatherHome()}
-                {this.state.location}
-            </div>
+            <main>
+                <div>
+                    <Link to="/config">
+                        <button type="button" className="btn btn-primary">Configure</button>
+                    </Link>
+                    <Search
+                        onSubmit={this.changeLocation}
+                    />
+                    {this.renderWeatherHome()}
+                    {this.state.location}
+                </div>
+            </main>
         );
     }
 
