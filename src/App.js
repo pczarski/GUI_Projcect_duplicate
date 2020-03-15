@@ -16,14 +16,14 @@ const api= {
 
 
 function App() {
-
+    console.log('rendering app');
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
     const [initial, setInitial] = useState("True");
 
 
     if (initial === "True"){
-        setInitial("False")
+        setInitial("False");
         fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.apikey}`)
             .then(res => res.json())
             .then(result => {
