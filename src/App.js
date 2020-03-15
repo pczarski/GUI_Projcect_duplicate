@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+<<<<<<< Updated upstream
+=======
+import { render } from '@testing-library/react';
+import $ from 'jquery'
+
+var today = new Date();
+var time = today.getHours() + ":" + "00";
+var breed = 'Golden Retreiver';
+var Window = "Weather";
+var location = "London";
+>>>>>>> Stashed changes
 
 const api= {
     apikey: "928d3716bf756a2b7ce8b6b6a49dfe38",
@@ -7,7 +18,6 @@ const api= {
 };
 
 function App() {
-
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
 
