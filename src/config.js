@@ -16,7 +16,7 @@ export default class Config extends React.Component{
                 <div>
                     <h1>
                         Config
-                    </h1>
+                    </h1><br/>
                     <Select 
                     onSubmit1={this.props.changeBreed}
                     onSubmit2={this.props.changeSize}
@@ -28,7 +28,7 @@ export default class Config extends React.Component{
                         onSubmit={this.props.changeLocation}
                     />
                     <Link to="/">
-                        <button type="button" className="btn btn-primary">Go Back</button>
+                        <button type="button" className="Button2">Go Back</button>
                     </Link>
                 </div>
             </main>

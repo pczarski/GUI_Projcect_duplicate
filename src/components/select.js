@@ -33,11 +33,11 @@ export default class Select extends React.Component {
                     <option value="Medium">Beagle</option>
                     <option value="Small">Pug</option>
                     <option value="Small">Pomeranian</option>
-                </select>
-                <button type="button" onClick = {() => this.sendSize()}>
+                </select><br/>
+                <button type="button" onClick = {() => this.sendSize()} className="Button2">
                     save
-                </button>
-            </div>
+                </button><br/>
+                <br/></div>
         )
     }
 

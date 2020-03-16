@@ -33,7 +33,7 @@ export default class Search extends React.Component {
                         onChange={(e) => this.updateQuery(e)}
                         value={this.state.query}
                     />
-                    <button type="button" onClick = {() => this.sendQuery()}>
+                    <button type="button" onClick = {() => this.sendQuery()} className="Button2">
                         save
                     </button>
                 </form>

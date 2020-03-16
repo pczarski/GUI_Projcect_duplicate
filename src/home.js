@@ -94,7 +94,7 @@ export default class Home extends React.Component {
                 <main>
                     <div className="weather-box">
                         <Link to="/config">
-                            <button type="button" className="btn btn-primary">Configure</button>
+                            <button type="button" className="Button3">Change Breed/Location</button>
                         </Link>
 
                         {this.renderWeatherHome()}
