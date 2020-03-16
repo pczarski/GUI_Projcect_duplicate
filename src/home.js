@@ -4,6 +4,7 @@ import WeatherHome from "./components/weather_home";
 import './App.css';
 import Search from "./components/search";
 import {Link} from 'react-router-dom';
+import WalkNow from "./components/walk-now";
 
 const api= {
     apikey: "5890b051c398fd53af1e1a449157b1de",
@@ -69,18 +70,42 @@ export default class Home extends React.Component {
         );
     };
 
+    renderRecommend() {
+        const theWeather = this.state.weather;
+        const theSize = this.props.size;
+        return(
+            <WalkNow
+                weather={theWeather}
+                size={theSize}
+            />
+            );
+    };
+
     render() {
         console.log('rendering app2 ' + this.props.breed);
         console.log(this.state.weather);
         console.log(this.state);
         return (
             <main>
-                <div>
+                <div className="weather-box">
                     <Link to="/config">
                         <button type="button" className="btn btn-primary">Configure</button>
                     </Link>
 
                     {this.renderWeatherHome()}
+                    <div className="dog-box">
+                        <h3>
+                            Dog breed: <br/>
+                            {this.props.breed} <br/>
+                            Dog size: <br/>
+                            {this.props.size}
+                        </h3>
+                    </div>
+
+                    <div>
+                        {this.renderRecommend()}
+                    </div>
+
                     {this.state.location}
                 </div>
             </main>

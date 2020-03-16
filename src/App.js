@@ -6,7 +6,8 @@ import Config from "./config";
 export default function App()  {
 
     const [breed, setBreed] = useState("Bulldog");
-    const [location, setLocation] = useState("London")
+    const [location, setLocation] = useState("London");
+    const [size, setSize] = useState("Large");
     console.log(breed);
     return(
         <Router>
@@ -19,6 +20,7 @@ export default function App()  {
                             <Home
                             {...props} breed={breed}
                             location={location}
+                            size={size}
                             />}
                     />
 
@@ -28,6 +30,7 @@ export default function App()  {
                             <Config
                             {...props} changeBreed = {setBreed}
                             changeLocation = {setLocation}
+                            changeSize = {setSize}
                         />}
                     />
 

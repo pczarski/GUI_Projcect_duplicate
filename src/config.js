@@ -17,15 +17,20 @@ export default class Config extends React.Component{
                     <Search
                         onSubmit={this.props.changeBreed}
                     />
-                    <br/>
                     <h3>
                         Enter Location
                     </h3>
                     <Search
                         onSubmit={this.props.changeLocation}
                     />
+                    <h3>
+                        Enter Size
+                    </h3>
+                    <Search
+                        onSubmit={this.props.changeSize}
+                    />
                     <Link to="/">
-                        <button type="button" className="btn btn-primary">Submit</button>
+                        <button type="button" className="btn btn-primary">Go Back</button>
                     </Link>
                 </div>
             </main>
