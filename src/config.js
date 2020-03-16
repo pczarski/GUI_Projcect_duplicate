@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import Search from "./components/search";
 
+// config page. It reuses the search.
+// the onSubmit prop passed to search is the function you want to run once the
+// text is submitted, the typed text will be passed to this function as argument
 export default class Config extends React.Component{
 
     render() {

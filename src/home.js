@@ -5,30 +5,31 @@ import './App.css';
 import Search from "./components/search";
 import {Link} from 'react-router-dom';
 import WalkNow from "./components/walk-now";
+import {sampleWeather} from "./assets/sample-weather";
 
 const api= {
     apikey: "5890b051c398fd53af1e1a449157b1de",
     base: "https://api.openweathermap.org/data/2.5/weather?q="
 };
-
+// temporary variable that prevents api from sending too many requests
+// only for debugging purposes
 var count = 0;
 
-
+// main component of the home screen
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
+        // we only need to store
         this.state = {
-          //  location: "London", // by default the location is London
-            //   breed: null, // by default breed and size is not selected
-            size: null,
-            temp: null,
-            conditions: "Cloudy",
-            weather: null,
+            // there is a sampleWeather JSON to load be default to ensure smooth functioning
+            // and so that the app shows something even if we fail to load from api
+            weather: sampleWeather,
         }
     }
 
-
+    // queries the open-weather api and updates the components state to the
+    // current weather
     fetchWeather() {
         console.log("fetch called!");
         count++;
@@ -43,20 +44,22 @@ export default class Home extends React.Component {
         }
     };
 
+    // updates component's state to the given weather json
     updateWeatherHome = (data) => {
         console.log(this);
         console.log(this.props.location);
         this.setState({
-            temp: data['main']['temp'],
-            conditions: data['weather']['0']['description'],
             weather: data,
         })
     };
 
+    //this functions loads
+    // as soon as the component loads, right when it loads, we fetch the weather
     componentDidMount() {
         this.fetchWeather()
     }
 
+    // helper function that renders the components that displays the weather
     renderWeatherHome() {
         const temp = this.state.temp;
         const conditions = this.state.conditions;
@@ -70,6 +73,7 @@ export default class Home extends React.Component {
         );
     };
 
+    // helper funcions that renders the components that recommends the walk
     renderRecommend() {
         const theWeather = this.state.weather;
         const theSize = this.props.size;
@@ -112,7 +116,6 @@ export default class Home extends React.Component {
                     </div>
                 </main>
             </div>
-
         );
     }
 

@@ -1,6 +1,7 @@
 // TODO: make the home screen weather display here
 import React from 'react';
 
+// component that renders the home screen weather display
 export default class WeatherHome extends React.Component {
     render() {
         const today = new Date();

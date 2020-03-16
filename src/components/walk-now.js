@@ -1,6 +1,7 @@
 import React from "react";
 import {generateAdvice} from "../lib/recommend";
 
+// component that renders the walk recommendation
 export default class WalkNow extends React.Component{
     render() {
         const weather = this.props.weather;
