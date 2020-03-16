@@ -101,7 +101,6 @@ main {
 }
 
 .weather-box .weather {
-  text-align: center;
   color: #FFF;
   font-size: 40px;
   font-weight: 650;
@@ -115,7 +114,6 @@ main {
   font-weight: 650;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
-
 .dog-box{
   position:relative;
   text-align: center;
@@ -130,6 +128,7 @@ main {
   text-align: center;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
+
 .Button{
   align-self: center;
   text-align: center;
