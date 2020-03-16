@@ -12,7 +12,7 @@ export default class Select extends React.Component {
 
     // updates the state of this component to the current text in the field
     updateDog(){
-        let e = document.getElementById("dropdown");
+        const e = document.getElementById("dropdown");
         this.state.breed = e.options[e.selectedIndex].text;
         this.state.size = e.options[e.selectedIndex].value;
         this.props.onSubmit1(this.state.breed);
@@ -33,6 +33,11 @@ export default class Select extends React.Component {
                     <option value="Medium">Beagle</option>
                     <option value="Small">Pug</option>
                     <option value="Small">Pomeranian</option>
+                    <option value="Large">Husky</option>
+                    <option value="Medium">Shiba Inu</option>
+                    <option value="Medium">Bulldog</option>
+                    <option value="Large">Boxer</option>
+                    <option value="Small">Chihuahua</option>
                 </select><br/>
                 <button type="button" onClick = {() => this.sendSize()} className="Button2">
                     save
