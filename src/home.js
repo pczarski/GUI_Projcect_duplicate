@@ -6,10 +6,13 @@ import Search from "./components/search";
 import {Link} from 'react-router-dom';
 import WalkNow from "./components/walk-now";
 import {sampleWeather} from "./assets/sample-weather";
+import SmallWeather from "./components/small-weather";
+import {sampleForecast} from "./assets/sample-weather";
 
 const api= {
     apikey: "5890b051c398fd53af1e1a449157b1de",
-    base: "https://api.openweathermap.org/data/2.5/weather?q="
+    base: "https://api.openweathermap.org/data/2.5/weather?q=",
+    forecastBase: "https://api.openweathermap.org/data/2.5/forecast?q=",
 };
 // temporary variable that prevents api from sending too many requests
 // only for debugging purposes
@@ -25,6 +28,7 @@ export default class Home extends React.Component {
             // there is a sampleWeather JSON to load be default to ensure smooth functioning
             // and so that the app shows something even if we fail to load from api
             weather: sampleWeather,
+            forecast: sampleForecast.list,
         }
     }
 
@@ -50,14 +54,37 @@ export default class Home extends React.Component {
         console.log(this.props.location);
         this.setState({
             weather: data,
-        })
+        });
     };
+
+    //fetch the 5 day forecast
+    fetchForecast() {
+        console.log("fetching forecast!!!");
+        const url = api.forecastBase + this.props.location + "&units=metric&APPID=" + api.apikey;
+        // example: https://api.openweathermap.org/data/2.5/forecast?q=London&appid=5890b051c398fd53af1e1a449157b1de
+        console.log(url);
+        $.ajax({
+            url: url,
+            dataType: "json",
+            success: this.updateForecast,
+        });
+    };
+
+    updateForecast = (data) => {
+        console.log(data.list);
+        this.setState({
+            forecast: data.list,
+        });
+    };
+
+
 
     //this functions loads
     // as soon as the component loads, right when it loads, we fetch the weather
     componentDidMount() {
-        this.fetchWeather()
-    }
+        this.fetchWeather();
+        this.fetchForecast();
+    };
 
     // helper function that renders the components that displays the weather
     renderWeatherHome() {
@@ -108,8 +135,17 @@ export default class Home extends React.Component {
                             </h3>
                         </div>
 
+                        <SmallWeather
+                            onClick={() => this.fetchForecast()}
+                            forecast={this.state.forecast}
+                        />
+
                         <div>
                             {this.renderRecommend()}
+                        </div>
+
+                        <div>
+
                         </div>
 
                         {this.state.location}
