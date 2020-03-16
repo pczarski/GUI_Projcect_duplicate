@@ -7,7 +7,7 @@ export default function App()  {
 
     // define hooks, for easy state management
     // the App keeps the states that need to be passed between screens
-    const [breed, setBreed] = useState("Bulldog");
+    const [breed, setBreed] = useState("Golden Retriever");
     const [location, setLocation] = useState("London");
     const [size, setSize] = useState("Large");
     console.log(breed);
