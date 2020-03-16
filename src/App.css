@@ -9,7 +9,7 @@ body {
 }
 
 .App {
-  background-image: url("./assets/rainy-bg.jpg");
+  background-color:#769ee3 ;
   background-position: bottom;
   background-size: cover;
   transition: 0.4 ease-out;
@@ -17,7 +17,7 @@ body {
 }
 
 .App.Clear {
-  background-image: url("./assets/clearsky-bg.jpg")
+  background-color:#769ee3 ;
 }
 
 main {
@@ -101,13 +101,19 @@ main {
 }
 
 .weather-box .weather {
-  text-align: center;
   color: #FFF;
   font-size: 40px;
   font-weight: 650;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
+.advice-box {
+  text-align: center;
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 650;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
 .dog-box{
   position:relative;
   text-align: center;
@@ -122,6 +128,7 @@ main {
   text-align: center;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
+
 .Button{
   align-self: center;
   text-align: center;
