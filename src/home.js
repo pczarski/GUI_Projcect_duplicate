@@ -83,32 +83,36 @@ export default class Home extends React.Component {
 
     render() {
         console.log('rendering app2 ' + this.props.breed);
-        console.log(this.state.weather);
+        const weatherNow = this.state.weather;
         console.log(this.state);
         return (
-            <main>
-                <div className="weather-box">
-                    <Link to="/config">
-                        <button type="button" className="btn btn-primary">Configure</button>
-                    </Link>
+            <div className={(weatherNow != null)
+                ? ((weatherNow.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
+                <main>
+                    <div className="weather-box">
+                        <Link to="/config">
+                            <button type="button" className="btn btn-primary">Configure</button>
+                        </Link>
 
-                    {this.renderWeatherHome()}
-                    <div className="dog-box">
-                        <h3>
-                            Dog breed: <br/>
-                            {this.props.breed} <br/>
-                            Dog size: <br/>
-                            {this.props.size}
-                        </h3>
+                        {this.renderWeatherHome()}
+                        <div className="dog-box">
+                            <h3>
+                                Dog breed: <br/>
+                                {this.props.breed} <br/>
+                                Dog size: <br/>
+                                {this.props.size}
+                            </h3>
+                        </div>
+
+                        <div>
+                            {this.renderRecommend()}
+                        </div>
+
+                        {this.state.location}
                     </div>
+                </main>
+            </div>
 
-                    <div>
-                        {this.renderRecommend()}
-                    </div>
-
-                    {this.state.location}
-                </div>
-            </main>
         );
     }
 
