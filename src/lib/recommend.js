@@ -1,4 +1,4 @@
-export function generateAdvice(degrees,desc,dSize) {
+export function generateAdvice(degrees, desc, dSize) {
     if (dSize === "Large"){
         if (desc === "Atmosphere" ){
             return " Please review your environment before taking your dog on a walk. The atmosphere can be decieving and so personal judgement is needed. The max recommended duration for the walk is 40 minutes."

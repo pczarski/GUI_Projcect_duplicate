@@ -9,12 +9,14 @@ export default class Search extends React.Component {
         };
     }
 
+    // updates the state of this component to the current text in the field
     updateQuery(e){
         this.setState({
             query: e.target.value,
         });
     };
 
+    // passes the query the the given function
     sendQuery(){
         this.props.onSubmit(this.state.query);
     }
