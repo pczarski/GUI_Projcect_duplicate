@@ -14,6 +14,7 @@ const api= {
     base: "https://api.openweathermap.org/data/2.5/weather?q=",
     forecastBase: "https://api.openweathermap.org/data/2.5/forecast?q=",
 };
+
 // temporary variable that prevents api from sending too many requests
 // only for debugging purposes
 var count = 0;
@@ -104,10 +105,12 @@ export default class Home extends React.Component {
     renderRecommend() {
         const theWeather = this.state.weather;
         const theSize = this.props.size;
+        const theBreed = this.props.breed
         return(
             <WalkNow
                 weather={theWeather}
                 size={theSize}
+                breed={theBreed}
             />
             );
     };
@@ -121,6 +124,7 @@ export default class Home extends React.Component {
                 ? ((weatherNow.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
                 <main>
                     <div className="weather-box">
+                      
                         <Link to="/config">
                             <button type="button" className="Button3">Change Breed/Location</button>
                         </Link>

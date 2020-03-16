@@ -17,7 +17,7 @@ body {
 }
 
 .App.Clear {
-  background-color:#769ee3 ;
+  background-color:#769ee3;
 }
 
 main {
@@ -41,12 +41,9 @@ main {
   background: none;
   border: none;
   outline: none;
-
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 25px;
-
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
-
   color: #313131;
   font-size: 16px;
   transition: 0.4s ease;
@@ -55,8 +52,6 @@ main {
 .search-box .search-bar:focus {
   background-color: (255, 255, 255, 0.8);
 }
-
-
 
 .date {
   font-weight: bold;

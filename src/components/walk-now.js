@@ -8,10 +8,12 @@ export default class WalkNow extends React.Component{
 
         if(weather != null){
             console.log(this.props.size);
+
             const advice = generateAdvice(
                 Math.round(weather.main.temp),
                 weather.weather[0].main,
-                this.props.size
+                this.props.size,
+                this.props.breed
             );
             return (
                 <div className="advice-box">
