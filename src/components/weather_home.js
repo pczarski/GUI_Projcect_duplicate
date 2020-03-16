@@ -24,6 +24,7 @@ export default class WeatherHome extends React.Component {
                         <div className="weather">
                             {weatherDescription}</div>
                     </div>
+
                 </div>
             </div>
 
