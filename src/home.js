@@ -122,7 +122,7 @@ export default class Home extends React.Component {
                 <main>
                     <div className="weather-box">
                         <Link to="/config">
-                            <button type="button" className="btn btn-primary">Configure</button>
+                            <button type="button" className="Button3">Change Breed/Location</button>
                         </Link>
 
                         {this.renderWeatherHome()}
@@ -130,8 +130,6 @@ export default class Home extends React.Component {
                             <h3>
                                 Dog breed: <br/>
                                 {this.props.breed} <br/>
-                                Dog size: <br/>
-                                {this.props.size}
                             </h3>
                         </div>
 
@@ -139,16 +137,9 @@ export default class Home extends React.Component {
                             onClick={() => this.fetchForecast()}
                             forecast={this.state.forecast}
                         />
-
                         <div>
                             {this.renderRecommend()}
                         </div>
-
-                        <div>
-
-                        </div>
-
-                        {this.state.location}
                     </div>
                 </main>
             </div>

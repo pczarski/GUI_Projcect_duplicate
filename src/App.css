@@ -9,7 +9,7 @@ body {
 }
 
 .App {
-  background-image: url("./assets/rainy-bg.jpg");
+  background-color:#769ee3 ;
   background-position: bottom;
   background-size: cover;
   transition: 0.4 ease-out;
@@ -17,7 +17,7 @@ body {
 }
 
 .App.Clear {
-  background-image: url("./assets/clearsky-bg.jpg")
+  background-color:#769ee3 ;
 }
 
 main {
@@ -32,8 +32,9 @@ main {
 }
 
 .search-box .search-bar {
+  margin-top: 15px;
   display: block;
-  padding: 15px;
+  padding: 2%;
   width: 100%;
 
   appearance: none;
@@ -42,7 +43,7 @@ main {
   outline: none;
 
   background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 0px 0px 16px 16xp;
+  border-radius: 25px;
 
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
 
@@ -149,5 +150,36 @@ main {
   color: #FFF;
   font-size: 20px;
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+}
+.Select{
+  margin-top: 15px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 25px;
+  padding: 2%;
+}
+.Button2{
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.2);
+
+  border-radius: 16px;
+  color: #FFF;
+  font-size: 20px;
+  text-align: center;
+}
+.Button3{
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.2);
+width: 100%;
+  border-radius: 16px;
+  color: #FFF;
+  font-size: 20px;
   text-align: center;
 }
