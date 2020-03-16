@@ -10,7 +10,7 @@ const api= {
     base: "https://api.openweathermap.org/data/2.5/weather?q="
 };
 
-var count = 30;
+var count = 0;
 
 
 export default class Home extends React.Component {
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            location: "London", // by default the location is London
+          //  location: "London", // by default the location is London
             //   breed: null, // by default breed and size is not selected
             size: null,
             temp: null,
@@ -32,7 +32,7 @@ export default class Home extends React.Component {
         console.log("fetch called!");
         count++;
         if( count < 20) {
-            const url = api.base + this.state.location + "&units=metric&APPID=" + api.apikey;
+            const url = api.base + this.props.location + "&units=metric&APPID=" + api.apikey;
             console.log(url);
             $.ajax({
                 url: url,
@@ -44,20 +44,12 @@ export default class Home extends React.Component {
 
     updateWeatherHome = (data) => {
         console.log(this);
-        console.log(this.state.location);
+        console.log(this.props.location);
         this.setState({
             temp: data['main']['temp'],
             conditions: data['weather']['0']['description'],
             weather: data,
         })
-    };
-
-    changeLocation = (newLocation) => {
-        console.log("calling new location" + newLocation);
-        this.setState({
-            location: newLocation
-        });
-        this.fetchWeather();
     };
 
     componentDidMount() {
@@ -87,9 +79,7 @@ export default class Home extends React.Component {
                     <Link to="/config">
                         <button type="button" className="btn btn-primary">Configure</button>
                     </Link>
-                    <Search
-                        onSubmit={this.changeLocation}
-                    />
+
                     {this.renderWeatherHome()}
                     {this.state.location}
                 </div>

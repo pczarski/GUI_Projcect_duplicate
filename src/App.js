@@ -6,6 +6,7 @@ import Config from "./config";
 export default function App()  {
 
     const [breed, setBreed] = useState("Bulldog");
+    const [location, setLocation] = useState("London")
     console.log(breed);
     return(
         <Router>
@@ -14,12 +15,20 @@ export default function App()  {
 
                     <Route
                         path="/" exact
-                        render={(props) => <Home {...props} breed={breed}/>}
+                        render={(props) =>
+                            <Home
+                            {...props} breed={breed}
+                            location={location}
+                            />}
                     />
 
                     <Route
                         path="/config"
-                        render={(props) => <Config {...props} changeBreed = {setBreed}/>}
+                        render={(props) =>
+                            <Config
+                            {...props} changeBreed = {setBreed}
+                            changeLocation = {setLocation}
+                        />}
                     />
 
                 </Switch>

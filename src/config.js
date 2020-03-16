@@ -11,11 +11,21 @@ export default class Config extends React.Component{
                     <h1>
                         Config
                     </h1>
+                    <h3>
+                        Enter Dog Breed
+                    </h3>
                     <Search
                         onSubmit={this.props.changeBreed}
                     />
+                    <br/>
+                    <h3>
+                        Enter Location
+                    </h3>
+                    <Search
+                        onSubmit={this.props.changeLocation}
+                    />
                     <Link to="/">
-                        <button type="button" className="btn btn-primary">Save</button>
+                        <button type="button" className="btn btn-primary">Submit</button>
                     </Link>
                 </div>
             </main>

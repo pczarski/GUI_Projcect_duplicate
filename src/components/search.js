@@ -32,7 +32,7 @@ export default class Search extends React.Component {
                         value={this.state.query}
                     />
                     <button type="button" onClick = {() => this.sendQuery()}>
-                        submit
+                        save
                     </button>
                 </form>
 
