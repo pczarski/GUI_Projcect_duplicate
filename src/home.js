@@ -79,7 +79,6 @@ export default class Home extends React.Component {
     };
 
 
-
     //this functions loads
     // as soon as the component loads, right when it loads, we fetch the weather
     componentDidMount() {
@@ -105,12 +104,14 @@ export default class Home extends React.Component {
     renderRecommend() {
         const theWeather = this.state.weather;
         const theSize = this.props.size;
-        const theBreed = this.props.breed
+        const theBreed = this.props.breed;
+        const forecast = this.state.forecast;
         return(
             <WalkNow
                 weather={theWeather}
                 size={theSize}
                 breed={theBreed}
+                forecast={forecast}
             />
             );
     };

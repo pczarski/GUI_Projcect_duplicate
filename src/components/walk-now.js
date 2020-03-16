@@ -5,7 +5,7 @@ import {generateAdvice} from "../lib/recommend";
 export default class WalkNow extends React.Component{
     render() {
         const weather = this.props.weather;
-
+        const forecast = this.props.forecast;
         if(weather != null){
             console.log(this.props.size);
 
@@ -13,7 +13,8 @@ export default class WalkNow extends React.Component{
                 Math.round(weather.main.temp),
                 weather.weather[0].main,
                 this.props.size,
-                this.props.breed
+                this.props.breed,
+                forecast
             );
             return (
                 <div className="advice-box">

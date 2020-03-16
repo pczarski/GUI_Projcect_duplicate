@@ -28,8 +28,8 @@ export default class Select extends React.Component {
             <div >
                 <label >Select your breed: </label><br></br>
                 <select id="dropdown" onChange={() => this.updateDog()}  className="Select" >
-                    <option value="Large">Golden Retriver</option>
-                    <option value="Large">German Sheapord</option>
+                    <option value="Large">Golden Retriever</option>
+                    <option value="Large">German Shepherd</option>
                     <option value="Medium">Beagle</option>
                     <option value="Small">Pug</option>
                     <option value="Small">Pomeranian</option>
@@ -38,6 +38,9 @@ export default class Select extends React.Component {
                     <option value="Medium">Bulldog</option>
                     <option value="Large">Boxer</option>
                     <option value="Small">Chihuahua</option>
+                    <option value="Large">Dalmatian</option>
+                    <option value="Small">Rottweiler</option>
+
                 </select><br/>
                 <button type="button" onClick = {() => this.sendSize()} className="Button2">
                     save

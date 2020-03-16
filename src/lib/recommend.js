@@ -1,4 +1,35 @@
-export function generateAdvice(degrees, desc, dSize,breed) {
+
+//parses the forecast data and returns only today's forecast with only the info needed
+function getForecastInfo(forecasts) {
+    let todayForecast = [];
+    let today = new Date().getDate();
+
+    for(let i = 0; i < forecasts.length; i++) {
+        const day = parseInt(forecasts[i].dt_txt.substring(8,10));
+        console.log(day);
+        console.log(today);
+        if(day != today){
+            return todayForecast;
+        }
+        todayForecast.push({
+            "time":forecasts[i].dt_txt.substring(11),
+            "id":forecasts[i].weather[0].id,
+            "main":forecasts[i].weather[0].main,
+            "description":forecasts[i].weather[0].description,
+            "icon": forecasts[i].weather[0].icon,
+        });
+        console.log(todayForecast);
+    }
+    return todayForecast;
+}
+
+
+export function generateAdvice(degrees, desc, dSize, breed, forecast) {
+
+    // use forecast info the generate advice for walk time and place
+    const forecastInfo = getForecastInfo(forecast);
+    console.log(forecastInfo);
+
     if (dSize === "Large"){
         if (desc === "Atmosphere" ){
             return " Please review your environment before taking your " + breed +" on a walk. The atmosphere can be decieving and so personal judgement is needed. The max recommended duration for the walk is 40 minutes."
