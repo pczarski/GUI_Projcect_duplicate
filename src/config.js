@@ -12,9 +12,7 @@ export default class Config extends React.Component{
         return(
             <main>
                 <div>
-                    <h1>
-                        Config
-                    </h1><br/>
+                    <br/>
                     <Select 
                     onSubmit1={this.props.changeBreed}
                     onSubmit2={this.props.changeSize}
