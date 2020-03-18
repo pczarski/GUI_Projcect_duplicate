@@ -29,6 +29,7 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast) {
     // use forecast info the generate advice for walk time and place
     const forecastInfo = getForecastInfo(forecast);
     console.log(forecastInfo);
+  
     let msg=""
     let walkieTimes = new Array();
     for( let i=0; i < forecastInfo.length;i++)
@@ -71,7 +72,6 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast) {
         msg += "The weather should be good enough for a walk at" + times;
             
     }
-    
 
     if (dSize === "Large"){
         if (desc === "Atmosphere" ){
