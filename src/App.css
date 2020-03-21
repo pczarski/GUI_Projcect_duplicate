@@ -129,7 +129,7 @@ main {
   color:#000000;
   font-size: 40px;
   text-align: center;
-  font-family: 'Roboto-Regular';
+  font-family: 'Roboto-Italic';
 }
 
 .Button{
@@ -175,10 +175,10 @@ main {
   text-align: center;
   display: inline-block;
   margin: 30px auto;
-  width:40%;
+  width:28%;
   border-radius: 10px;
   border-color: #000000;
-  background-color: #ffffff;
+  background-color: #eceff1;
   font-size: 20px;
   text-align: center;
   font-family: 'Roboto-italic';
