@@ -166,7 +166,7 @@ main {
   margin: 30px auto;
   border-color: #000000;
   background-color: #eceff1;
-  padding: 0.2%;
+  padding: 3px;
 
   border-radius: 10px;
   color:#000000;
@@ -179,7 +179,7 @@ main {
   display: inline-block;
   margin: 30px auto;
   padding:0.3%;
-  width:20%;
+  width:220px;
   border-radius: 10px;
   border-color: #000000;
   background-color: #eceff1;
