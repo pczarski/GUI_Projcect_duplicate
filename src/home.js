@@ -122,7 +122,7 @@ export default class Home extends React.Component {
         console.log(this.state);
         return (
             <div className={(weatherNow != null)
-                ? ((weatherNow.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
+                ? ((!isDark(weatherNow)) ? 'App Clear' : 'App') : 'App'}>
                 <main>
                     <div className="weather-box">
                       
@@ -151,4 +151,24 @@ export default class Home extends React.Component {
         );
     }
 
+}
+
+function isDark(weatherData) {
+    const localTime = weatherData.dt + weatherData.timezone;
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log(new Date((weatherData.sys.sunset+ weatherData.timezone)*1000).getHours());
+    console.log(new Date((weatherData.dt + weatherData.timezone)*1000).getHours());
+    console.log(new Date((weatherData.sys.sunrise+ weatherData.timezone)*1000).getHours());
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log(localTime - weatherData.sys.sunset - weatherData.dt);
+    if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
+ //   if(!(weatherData.dt > weatherData.sys.sunset)) {
+        return true;
+    }
+    const main = weatherData.weather[0].main;
+    if(main === "Rain" || main === "Thunderstorm") {
+        return true;
+    }
+    const code = weatherData.weather[0].id;
+    return [602, 616, 621, 622, 804].includes(code);
 }
