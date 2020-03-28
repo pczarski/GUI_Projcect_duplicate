@@ -2,6 +2,9 @@ import React from "react";
 import "./small-weather.css";
 import Cloud from "../assets/cloud.png";
 import Sun from "../assets/thsun.png";
+import Rain from "../assets/cloud.png";
+import Moon from "../assets/cloud.png";
+
 
 export default class SmallWeather extends React.Component{
 
@@ -12,7 +15,13 @@ export default class SmallWeather extends React.Component{
             const date = foreCastPoint.dt_txt;
             let src = Sun;
             let alt = "Sun";
-            if (main === "Clouds" || main === "Rain" ){
+            if (main ==="Rain") {
+                src = "Rain";
+                alt = "rain";
+            } else if (this.props.isDark) {
+                src = Moon;
+                alt = "night"
+            } else if (main === "Clouds"){
                 src = Cloud;
                 alt = "cloud";
             }

@@ -26,8 +26,8 @@ body {
 }
 
 .App {
-  background-color:#080712;
-  color: #eceff1;
+  background-color:#363636;
+  color: #ffffff;
   background-position: bottom;
   background-size: cover;
 
@@ -53,7 +53,6 @@ main {
   display: block;
   padding: 2%;
   width: 100%;
-
   appearance: none;
   background: none;
   border: none;
@@ -66,6 +65,23 @@ main {
 
 .search-box .search-bar:focus {
   background-color: (255, 255, 255, 0.8);
+}
+
+.searchDark {
+  background-color:#363636;
+  color: #ffffff;
+  border-color: #ffffff;
+  margin-top: 15px;
+  display: block;
+  padding: 2%;
+  width: 100%;
+  appearance: none;
+  background: none;
+  outline: none;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: 0.4s ease;
+  font-family: 'Roboto-LightItalic';
 }
 
 .date {
@@ -89,7 +105,7 @@ main {
 }
 
 .location-box .date {
-  color:#000000;
+  //color:#000000;
   font-size: 20px;
   font-weight: 300;
   font-style: italic;
@@ -160,6 +176,13 @@ main {
   border-radius: 25px;
   padding: 2%;
 }
+
+.Select.Dark{
+  background-color:#363636;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
 .Button2{
   align-self: center;
   text-align: center;
@@ -173,6 +196,13 @@ main {
   font-size: 20px;
   text-align: center;
 }
+
+.Button2.Dark {
+  background-color:#363636;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
 .Button3{
   align-self: center;
   text-align: center;
@@ -186,6 +216,12 @@ main {
   font-size: 18px;
   text-align: center;
   font-family: 'Roboto-italic';
+}
+
+.Button3.Dark {
+  background-color:#363636;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 .card--content {

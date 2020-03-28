@@ -28,12 +28,12 @@ export default class Search extends React.Component {
                     <input
                         ref = "searchField"
                         type = "text"
-                        className="search-bar"
+                        className={(this.props.isDark) ? "searchDark" : "search-bar"}
                         placeholder="Enter text..."
                         onChange={(e) => this.updateQuery(e)}
                         value={this.state.query}
                     />
-                    <button type="button" onClick = {() => this.sendQuery()} className="Button2">
+                    <button type="button" onClick = {() => this.sendQuery()} className={(this.props.isDark) ?"Button2 Dark" : "Button2"}>
                         save
                     </button>
                 </form>

@@ -26,8 +26,8 @@ export default class Select extends React.Component {
     render() {
         return (
             <div >
-                <label >Select your breed: </label><br></br>
-                <select id="dropdown" onChange={() => this.updateDog()}  className="Select" >
+                <label >Select your breed </label><br></br>
+                <select id="dropdown" onChange={() => this.updateDog()}  className={(this.props.isDark) ? "Select Dark" : "Select"} >
                     <option value="Large">Golden Retriever</option>
                     <option value="Large">German Shepherd</option>
                     <option value="Medium">Beagle</option>
@@ -42,7 +42,7 @@ export default class Select extends React.Component {
                     <option value="Small">Rottweiler</option>
 
                 </select><br/>
-                <button type="button" onClick = {() => this.sendSize()} className="Button2">
+                <button type="button" onClick = {() => this.sendSize()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>
                     save
                 </button><br/>
                 <br/></div>

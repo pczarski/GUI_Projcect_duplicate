@@ -120,6 +120,7 @@ export default class Home extends React.Component {
         console.log('rendering app2 ' + this.props.breed);
         const weatherNow = this.state.weather;
         console.log(this.state);
+        this.props.setDark(isDark(weatherNow));
         return (
             <div className={(weatherNow != null)
                 ? ((!isDark(weatherNow)) ? 'App Clear' : 'App') : 'App'}>
@@ -127,7 +128,7 @@ export default class Home extends React.Component {
                     <div className="weather-box">
                       
                         <Link to="/config">
-                            <button type="button" className="Button3">Change Breed/Location</button>
+                            <button type="button" className={isDark(weatherNow) ? 'Button3 Dark' : "Button3"}>Change Breed/Location</button>
                         </Link>
 
                         {this.renderWeatherHome()}
@@ -141,6 +142,7 @@ export default class Home extends React.Component {
                         <SmallWeather
                             onClick={() => this.fetchForecast()}
                             forecast={this.state.forecast}
+                            isDark={isDark(weatherNow)}
                         />
                         <div>
                             {this.renderRecommend()}
@@ -155,12 +157,6 @@ export default class Home extends React.Component {
 
 function isDark(weatherData) {
     const localTime = weatherData.dt + weatherData.timezone;
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    console.log(new Date((weatherData.sys.sunset+ weatherData.timezone)*1000).getHours());
-    console.log(new Date((weatherData.dt + weatherData.timezone)*1000).getHours());
-    console.log(new Date((weatherData.sys.sunrise+ weatherData.timezone)*1000).getHours());
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    console.log(localTime - weatherData.sys.sunset - weatherData.dt);
     if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
  //   if(!(weatherData.dt > weatherData.sys.sunset)) {
         return true;
