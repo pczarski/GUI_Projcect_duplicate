@@ -142,8 +142,9 @@ export default class Home extends React.Component {
                         <SmallWeather
                             onClick={() => this.fetchForecast()}
                             forecast={this.state.forecast}
-                            sunSet={weatherNow.sys.sunset}
-                            sunRise={weatherNow.sys.sunrise}
+                            sunSet={weatherNow.sys.sunset + weatherNow.timezone}
+                            sunRise={weatherNow.sys.sunrise + weatherNow.timezone}
+                            zoneOffset={weatherNow.timezone}
                         />
                         <div>
                             {this.renderRecommend()}
@@ -157,7 +158,7 @@ export default class Home extends React.Component {
 }
 
 function isDark(weatherData) {
-    const localTime = weatherData.dt + weatherData.timezone;
+    //const localTime = weatherData.dt + weatherData.timezone;
     if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
  //   if(!(weatherData.dt > weatherData.sys.sunset)) {
         return true;

@@ -13,13 +13,13 @@ export default class SmallWeather extends React.Component{
         if(foreCastPoint.main){
             const temperature = foreCastPoint.main.temp;
             const main = foreCastPoint.weather[0].main;
-            const date = foreCastPoint.dt_txt;
+            const date = new Date((foreCastPoint.dt + this.props.zoneOffset)*1000);
             let src = Sun;
             let alt = "Sun";
             if (main ==="Rain") {
                 src = Rain;
                 alt = "rain";
-            } else if (main === "Clouds" && isNight(foreCastPoint, this.props.sunSet, this.props.sunRise)){
+            } else if (main === "Clouds" && isNight(foreCastPoint.dt + this.props.zoneOffset, this.props.sunSet, this.props.sunRise)){
                 src = NightCloud;
                 alt = "cloudy night";
             } else if (main ==="Clouds") {
@@ -37,7 +37,7 @@ export default class SmallWeather extends React.Component{
                         {Math.round(temperature)}°C
                     </h4>
                     <h4>
-                        {date.substring(5,16)}
+                        {appen0(date.getMonth())}.{appen0(date.getDate())} {appen0(date.getHours())}:{appen0(date.getMinutes())}
                     </h4>
                 </div>
             );
@@ -61,12 +61,12 @@ export default class SmallWeather extends React.Component{
     };
 }
 
-function isNight(smallWeather, sunset, sunrise) {
+function isNight(time, sunset, sunrise) {
     const rise = new Date(sunrise * 1000).getHours();
     const set = new Date(sunset * 1000).getHours();
-    const now = new Date(smallWeather.dt * 1000).getHours();
+    const now = new Date(time * 1000).getHours();
 
-    console.log("time now: " + smallWeather.dt_txt);
+    console.log("time now: " + time);
     console.log("is night: " + !(rise < now && now < set));
     console.log(rise +'<'+now+'<'+set);
     // console.log(sunrise);
@@ -75,4 +75,11 @@ function isNight(smallWeather, sunset, sunrise) {
 
     //return !(smallWeather.dt < sunset && smallWeather.dt > sunrise);
     return !(rise-1 < now && now < set);
+}
+
+function appen0(n) {
+    if(n<=9){
+        return "0"+n;
+    }
+    return n;
 }
