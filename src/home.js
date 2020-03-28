@@ -142,7 +142,8 @@ export default class Home extends React.Component {
                         <SmallWeather
                             onClick={() => this.fetchForecast()}
                             forecast={this.state.forecast}
-                            isDark={isDark(weatherNow)}
+                            sunSet={weatherNow.sys.sunset}
+                            sunRise={weatherNow.sys.sunrise}
                         />
                         <div>
                             {this.renderRecommend()}
