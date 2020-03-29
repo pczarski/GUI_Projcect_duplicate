@@ -7,7 +7,8 @@ export default class WeatherHome extends React.Component {
         if(this.props.weather == null){
             return("");
         }
-        const today = new Date();
+        //const today = new Date();
+        const today = convertZones(this.props.weather);
         const temperature = this.props.weather.main.temp;
         const weatherDescription = this.props.weather.weather[0].description;
         return(
@@ -15,7 +16,12 @@ export default class WeatherHome extends React.Component {
                 <div>
                     <div className="location-box">
                         <div className="location">{this.props.weather.name}, {this.props.weather.sys.country}</div>
-                        <div className="date">{today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()}</div>
+                        <div className="time">
+                            {getHours(today.getHours())+ ':' + getHours(today.getMinutes())}
+                        </div>
+                        <div className="date">
+                            {today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()}
+                        </div>
                     </div>
                     <div className="weather-box">
                         <div className="temp">
@@ -29,4 +35,17 @@ export default class WeatherHome extends React.Component {
 
         );
     }
+}
+
+
+function convertZones(weatherData) {
+    const localTime = weatherData.dt + weatherData.timezone;
+    return new Date(localTime * 1000);
+}
+
+function getHours(dateInt) {
+    if(dateInt <= 9) {
+        return "0" + dateInt;
+    }
+    return dateInt;
 }

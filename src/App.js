@@ -10,13 +10,14 @@ export default function App()  {
     const [breed, setBreed] = useState("Golden Retriever");
     const [location, setLocation] = useState("London");
     const [size, setSize] = useState("Large");
+    const [dark, setDark] = useState(true);
     console.log(breed);
 
     // define the screens
     // using render={(props) => <ComponentName {...props} prop1={aValue}/> allows to pass props so that you can share states
     return(
         <Router>
-            <div className="App">
+            <div className={(dark) ? "App" : "App Clear"}>
                 <Switch>
 
                     <Route
@@ -26,6 +27,7 @@ export default function App()  {
                             {...props} breed={breed}
                             location={location}
                             size={size}
+                            setDark={setDark}
                             />}
                     />
 
@@ -36,6 +38,7 @@ export default function App()  {
                             {...props} changeBreed = {setBreed}
                             changeLocation = {setLocation}
                             changeSize = {setSize}
+                            isDark = {dark}
                         />}
                     />
 

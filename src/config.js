@@ -11,20 +11,22 @@ export default class Config extends React.Component{
     render() {
         return(
             <main>
-                <div>
+                <div className={(this.props.isDark) ? "App" : "App Clear"}>
                     <br/>
                     <Select 
                     onSubmit1={this.props.changeBreed}
                     onSubmit2={this.props.changeSize}
+                    isDark={this.props.isDark}
                     />
-                    <h3>
+                    <label>
                         Enter Location
-                    </h3>
+                    </label>
                     <Search
                         onSubmit={this.props.changeLocation}
+                        isDark={this.props.isDark}
                     />
                     <Link to="/">
-                        <button type="button" className="Button2">Go Back</button>
+                        <button type="button" className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>Go Back</button>
                     </Link>
                 </div>
             </main>

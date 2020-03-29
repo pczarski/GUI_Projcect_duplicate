@@ -120,14 +120,15 @@ export default class Home extends React.Component {
         console.log('rendering app2 ' + this.props.breed);
         const weatherNow = this.state.weather;
         console.log(this.state);
+        this.props.setDark(isDark(weatherNow));
         return (
             <div className={(weatherNow != null)
-                ? ((weatherNow.main.temp > 16) ? 'App Clear' : 'App') : 'App'}>
+                ? ((!isDark(weatherNow)) ? 'App Clear' : 'App') : 'App'}>
                 <main>
                     <div className="weather-box">
                       
                         <Link to="/config">
-                            <button type="button" className="Button3">Change Breed/Location</button>
+                            <button type="button" className={isDark(weatherNow) ? 'Button3 Dark' : "Button3"}>Change Breed/Location</button>
                         </Link>
 
                         {this.renderWeatherHome()}
@@ -141,6 +142,9 @@ export default class Home extends React.Component {
                         <SmallWeather
                             onClick={() => this.fetchForecast()}
                             forecast={this.state.forecast}
+                            sunSet={weatherNow.sys.sunset + weatherNow.timezone}
+                            sunRise={weatherNow.sys.sunrise + weatherNow.timezone}
+                            zoneOffset={weatherNow.timezone}
                         />
                         <div>
                             {this.renderRecommend()}
@@ -151,4 +155,18 @@ export default class Home extends React.Component {
         );
     }
 
+}
+
+function isDark(weatherData) {
+    //const localTime = weatherData.dt + weatherData.timezone;
+    if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
+ //   if(!(weatherData.dt > weatherData.sys.sunset)) {
+        return true;
+    }
+    const main = weatherData.weather[0].main;
+    if(main === "Rain" || main === "Thunderstorm") {
+        return true;
+    }
+    const code = weatherData.weather[0].id;
+    return [602, 616, 621, 622, 804].includes(code);
 }
