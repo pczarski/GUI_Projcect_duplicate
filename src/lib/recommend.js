@@ -97,9 +97,9 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) 
 
         }else if (desc === "Clouds" ) {
             if (degrees < -10 ){
-                return msg +"The day appears cloudy and extremely cold.Please ensure that your " + breed +" is covered perfectly to be able to keep warm in this environment. The recommended duration for the walk is 30 minutes though not advisable."
+                return msg +"The day appears cloudy and extremely cold. Please ensure that your " + breed +" is covered perfectly to be able to keep warm in this environment. The recommended duration for the walk is 30 minutes though not advisable."
             }else if( degrees > -10 && degrees <= 0 ) {
-                return msg +"The day appears cloudy and very cold.Please ensure that you and your " + breed +" are outfitted with warm clothing before going out.The recommended duration for the walk is 40 minutes."
+                return msg +"The day appears cloudy and very cold. Please ensure that you and your " + breed +" are outfitted with warm clothing before going out.The recommended duration for the walk is 40 minutes."
             }else if( degrees > 0 && degrees <= 10 ) {
                 return msg +"The day appears cloudy and  cold. Please ensure you are dressed appropriately and head home when you think your " + breed +" is cold. The recommended duration for the walk is 50 minutes."
             }else if( degrees > 10 && degrees <= 20 ) {

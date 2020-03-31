@@ -1,7 +1,9 @@
 // TODO: make the home screen weather display here
 import React, {useState} from 'react';
+import {breeds} from "../assets/breeds.js";
 
 export default class Select extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,11 +18,8 @@ export default class Select extends React.Component {
         const e = document.getElementById("dropdown");
         this.state.breed = e.options[e.selectedIndex].text;
         this.state.size = e.options[e.selectedIndex].value;
-        // this.props.onSubmit1(e.options[e.selectedIndex].text);
-        // this.props.onSubmit2(e.options[e.selectedIndex].value);
     };
 
-    
     updateDog() {
         this.props.changeBreed(this.state.breed);
         this.props.changeSize(this.state.size);
@@ -36,6 +35,13 @@ export default class Select extends React.Component {
     };
 
     render() {
+        // map supported dog breeds onto html tag
+        const renderedBreeds = breeds.map((breed) => {
+            return (
+                <option value={breed.size}>{breed.breed}</option>
+            );
+        });
+
         return (
             <div >
                 <label >Select your breed </label><br></br>
@@ -44,18 +50,8 @@ export default class Select extends React.Component {
                         onClick={this.removeMessage}
                 >
                     <option value="Large">-Please Select-</option>
-                    <option value="Large">Golden Retriever</option>
-                    <option value="Large">German Shepherd</option>
-                    <option value="Medium">Beagle</option>
-                    <option value="Small">Pug</option>
-                    <option value="Small">Pomeranian</option>
-                    <option value="Large">Husky</option>
-                    <option value="Medium">Shiba Inu</option>
-                    <option value="Medium">Bulldog</option>
-                    <option value="Large">Boxer</option>
-                    <option value="Small">Chihuahua</option>
-                    <option value="Large">Dalmatian</option>
-                    <option value="Small">Rottweiler</option>
+                    {renderedBreeds}
+
 
                 </select><br/>
                 <button type="button" onClick = {() => this.updateDog()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>

@@ -1,5 +1,6 @@
 // TODO: make the home screen weather display here
 import React from 'react';
+import {prefix0} from '../lib/lib.js';
 
 // weather home component
 export default class WeatherHome extends React.Component {
@@ -20,7 +21,7 @@ export default class WeatherHome extends React.Component {
                             {getHours(today.getHours())+ ':' + getHours(today.getMinutes())}
                         </div>
                         <div className="date">
-                            {today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()}
+                            {prefix0(today.getDate())+'-'+prefix0((today.getMonth()+1))+'-'+today.getFullYear()}
                         </div>
                     </div>
                     <div className="weather-box">

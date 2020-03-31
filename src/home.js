@@ -8,12 +8,12 @@ import WalkNow from "./components/walk-now";
 import {sampleWeather} from "./assets/sample-weather";
 import SmallWeather from "./components/small-weather";
 import {sampleForecast} from "./assets/sample-weather";
-
-const api= {
-    apikey: "5890b051c398fd53af1e1a449157b1de",
-    base: "https://api.openweathermap.org/data/2.5/weather?q=",
-    forecastBase: "https://api.openweathermap.org/data/2.5/forecast?q=",
-};
+import {api} from './App';
+// const api= {
+//     apikey: "5890b051c398fd53af1e1a449157b1de",
+//     base: "https://api.openweathermap.org/data/2.5/weather?q=",
+//     forecastBase: "https://api.openweathermap.org/data/2.5/forecast?q=",
+// };
 
 // temporary variable that prevents api from sending too many requests
 // only for debugging purposes
@@ -46,7 +46,7 @@ export default class Home extends React.Component {
                 dataType: "json",
                 success: this.updateWeatherHome,
                 error: this.locationNotFound
-            })
+            });
         }
     };
 
@@ -92,19 +92,18 @@ export default class Home extends React.Component {
     //this functions loads
     // as soon as the component loads, right when it loads, we fetch the weather
     componentDidMount() {
-        this.fetchWeather();
+        //this.fetchWeather();
+        this.props.fetchWeather();
         this.fetchForecast();
     };
 
     // helper function that renders the components that displays the weather
     renderWeatherHome() {
-        const temp = this.state.temp;
-        const conditions = this.state.conditions;
-        const weather = this.state.weather;
+      //  const temp = this.state.temp;
+      //  const conditions = this.state.conditions;
+        const weather = this.props.weather; //this.state.weather;
         return (
             <WeatherHome
-                temp = {temp}
-                conditions = {conditions}
                 weather = {weather}
             />
         );
@@ -112,7 +111,7 @@ export default class Home extends React.Component {
 
     // helper funcions that renders the components that recommends the walk
     renderRecommend() {
-        const weatherNow = this.state.weather;
+        const weatherNow = this.props.weather;
         const theSize = this.props.size;
         const theBreed = this.props.breed;
         const forecast = this.state.forecast;
@@ -129,7 +128,7 @@ export default class Home extends React.Component {
 
     render() {
         console.log('rendering app2 ' + this.props.breed);
-        const weatherNow = this.state.weather;
+        const weatherNow = this.props.weather;
         console.log(this.state);
         this.props.setDark(isDark(weatherNow));
         return (
