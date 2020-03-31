@@ -6,6 +6,7 @@ export default class WalkNow extends React.Component{
     render() {
         const weather = this.props.weather;
         const forecast = this.props.forecast;
+        const timezone = this.props.zoneOffset;
         if(weather != null){
             console.log(this.props.size);
 
@@ -14,7 +15,8 @@ export default class WalkNow extends React.Component{
                 weather.weather[0].main,
                 this.props.size,
                 this.props.breed,
-                forecast
+                forecast,
+                timezone,
             );
             return (
                 <div className="advice-box">

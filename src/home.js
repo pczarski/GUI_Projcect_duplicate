@@ -45,6 +45,7 @@ export default class Home extends React.Component {
                 url: url,
                 dataType: "json",
                 success: this.updateWeatherHome,
+                error: this.locationNotFound
             })
         }
     };
@@ -56,6 +57,15 @@ export default class Home extends React.Component {
         this.setState({
             weather: data,
         });
+    };
+
+    locationNotFound = (error) => {
+        console.log(error.responseText);
+        const response = JSON.parse(error.responseText);
+        if(response.cod === "404") {
+            this.props.changeLocation("Location not found or not supported");
+            console.log(this.props.location)
+        }
     };
 
     //fetch the 5 day forecast
@@ -102,16 +112,17 @@ export default class Home extends React.Component {
 
     // helper funcions that renders the components that recommends the walk
     renderRecommend() {
-        const theWeather = this.state.weather;
+        const weatherNow = this.state.weather;
         const theSize = this.props.size;
         const theBreed = this.props.breed;
         const forecast = this.state.forecast;
         return(
             <WalkNow
-                weather={theWeather}
+                weather={weatherNow}
                 size={theSize}
                 breed={theBreed}
                 forecast={forecast}
+                zoneOffset={weatherNow.timezone}
             />
             );
     };
@@ -133,8 +144,9 @@ export default class Home extends React.Component {
 
                         {this.renderWeatherHome()}
                         <div className="dog-box">
+
+                            <h5>Dog breed:</h5>
                             <h3>
-                                Dog breed: <br/>
                                 {this.props.breed} <br/>
                             </h3>
                         </div>

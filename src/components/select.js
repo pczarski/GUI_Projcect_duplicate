@@ -7,27 +7,43 @@ export default class Select extends React.Component {
         this.state = {
             breed: "Golden Retriever",
             size: "Large",
+            message: "",
         };
     }
 
     // updates the state of this component to the current text in the field
-    updateDog(){
+    handleSelect(){
         const e = document.getElementById("dropdown");
         this.state.breed = e.options[e.selectedIndex].text;
         this.state.size = e.options[e.selectedIndex].value;
-        this.props.onSubmit1(this.state.breed);
+        // this.props.onSubmit1(e.options[e.selectedIndex].text);
+        // this.props.onSubmit2(e.options[e.selectedIndex].value);
     };
 
     
-    sendSize(){
-        this.props.onSubmit2(this.state.size);
-    }
+    updateDog() {
+        this.props.changeBreed(this.state.breed);
+        this.props.changeSize(this.state.size);
+        this.setState({
+            message: "Saved!",
+        });
+    };
+
+    removeMessage = () => {
+        this.setState({
+            message: "",
+        })
+    };
 
     render() {
         return (
             <div >
                 <label >Select your breed </label><br></br>
-                <select id="dropdown" onChange={() => this.updateDog()}  className={(this.props.isDark) ? "Select Dark" : "Select"} >
+                <select id="dropdown" onChange={() => this.handleSelect()}
+                        className={(this.props.isDark) ? "Select Dark" : "Select"}
+                        onClick={this.removeMessage}
+                >
+                    <option value="Large">-Please Select-</option>
                     <option value="Large">Golden Retriever</option>
                     <option value="Large">German Shepherd</option>
                     <option value="Medium">Beagle</option>
@@ -42,12 +58,13 @@ export default class Select extends React.Component {
                     <option value="Small">Rottweiler</option>
 
                 </select><br/>
-                <button type="button" onClick = {() => this.sendSize()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>
+                <button type="button" onClick = {() => this.updateDog()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>
                     save
-                </button><br/>
+                </button>
+                <span className="message">{this.state.message}</span>
+                <br/>
                 <br/></div>
         )
     }
 
 }
-

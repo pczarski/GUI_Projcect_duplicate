@@ -1,6 +1,6 @@
 
 //parses the forecast data and returns only today's forecast with only the info needed
-function getForecastInfo(forecasts) {
+function getForecastInfo(forecasts, timezone) {
     let todayForecast = [];
     let today = new Date().getDate();
 
@@ -11,8 +11,10 @@ function getForecastInfo(forecasts) {
         if(day != today){
             return todayForecast;
         }
+        const date = new Date((forecasts[i].dt + timezone) * 1000);
         todayForecast.push({
-            "time":forecasts[i].dt_txt.substring(11),
+            //"time":forecasts[i].dt_txt.substring(11),
+            "time": prefix0(date.getHours())+":"+prefix0(date.getMinutes()),
             "id":forecasts[i].weather[0].id,
             "main":forecasts[i].weather[0].main,
             "description":forecasts[i].weather[0].description,
@@ -24,10 +26,10 @@ function getForecastInfo(forecasts) {
 }
 
 
-export function generateAdvice(degrees, desc, dSize, breed, forecast) {
+export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) {
 
     // use forecast info the generate advice for walk time and place
-    const forecastInfo = getForecastInfo(forecast);
+    const forecastInfo = getForecastInfo(forecast, timezone);
     console.log(forecastInfo);
   
     let msg=""
@@ -51,7 +53,7 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast) {
         }
     }
     else if(walkieTimes.length == 1){
-        msg += "The best time to go for a walk today is "+ walkieTimes[0] + ". ";        
+        msg += "The best time to go for a walk today is "+ walkieTimes[0] + ". ";
     }
     else if(walkieTimes.length == forecastInfo.length){
         msg += "Todays weather will be nice enough to go for a walk at any time. ";        
@@ -103,7 +105,7 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast) {
             }else if( degrees > 10 && degrees <= 20 ) {
                 return msg +"The day appears cloudy and fairly warm. It's a perfect day to head outside with your " + breed +". The recommended duration for the walk is up to 1 hour and 30 minutes."
             }else if( degrees > 20 && degrees <= 30 ) {
-                return msg +"The day appears cloudy but nice and warm. Its a perfect day to head outside and play with your" + breed +".The recommended duration for the walk is up to 2 hours."
+                return msg +"The day appears cloudy but nice and warm. Its a perfect day to head outside and play with your " + breed +".The recommended duration for the walk is up to 2 hours."
             }else if( degrees > 30 && degrees <= 40 ) {
                 return msg +"The day appears cloudy but can get very warm. Please stay well hydrated and keep exercise to a minimum.The recommended duration for the walk is no more than 20 minutes."
             }
@@ -300,4 +302,11 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast) {
             }
         }
     }
+}
+
+function prefix0(dateInt) {
+    if(dateInt <= 9) {
+        return "0" + dateInt;
+    }
+    return dateInt;
 }

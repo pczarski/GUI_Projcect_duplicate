@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from "./home";
 import Config from "./config";
+import {sampleWeather} from "./assets/sample-weather";
 
 export default function App()  {
 
@@ -11,6 +12,7 @@ export default function App()  {
     const [location, setLocation] = useState("London");
     const [size, setSize] = useState("Large");
     const [dark, setDark] = useState(true);
+    const [weather, setWeather] = useState(sampleWeather);
     console.log(breed);
 
     // define the screens
@@ -28,6 +30,8 @@ export default function App()  {
                             location={location}
                             size={size}
                             setDark={setDark}
+                            changeLocation = {setLocation}
+                            updateWeather = {setWeather}
                             />}
                     />
 
@@ -39,6 +43,7 @@ export default function App()  {
                             changeLocation = {setLocation}
                             changeSize = {setSize}
                             isDark = {dark}
+                            location = {location}
                         />}
                     />
 
