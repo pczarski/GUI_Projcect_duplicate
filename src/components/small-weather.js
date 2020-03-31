@@ -65,15 +65,6 @@ function isNight(time, sunset, sunrise) {
     const rise = new Date(sunrise * 1000).getHours();
     const set = new Date(sunset * 1000).getHours();
     const now = new Date(time * 1000).getHours();
-
-    console.log("time now: " + time);
-    console.log("is night: " + !(rise < now && now < set));
-    console.log(rise +'<'+now+'<'+set);
-    // console.log(sunrise);
-    // console.log(time);
-    // console.log(sunset);
-
-    //return !(smallWeather.dt < sunset && smallWeather.dt > sunrise);
     return !(rise-1 < now && now < set);
 }
 
