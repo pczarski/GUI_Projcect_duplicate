@@ -38,7 +38,7 @@ export default function SmallWeather(props) {
             }
 
             return (
-                <div className="card-content">
+                <div className="card-content" key={foreCastPoint.dt}>
                     <img src={src} alt={alt}/>
                     <h4>
                         {Math.round(temperature)}°C

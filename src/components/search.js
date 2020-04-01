@@ -3,6 +3,11 @@ import $ from 'jquery';
 import {api} from "../App";
 
 export default class Search extends React.Component {
+
+    /*
+    * the reason we keep states here and pass the query to parent
+    * is because we don't want to call fetch weather for every character user types
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -81,7 +86,7 @@ export default class Search extends React.Component {
                         value={this.state.query}
                         onClick = {this.removeMessage}
                     />
-                    <button type="button" onClick = {() => this.handleQuery()} className={(this.props.isDark) ?"Button2 Dark" : "Button2"}>
+                    <button type="button" onClick = {() => this.handleQuery()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>
                         save
                     </button>
                     <span id="message" className={this.state.error ? "message error" : "message"}> {this.state.message}</span>

@@ -1,67 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import $ from 'jquery';
 import WeatherHome from "../components/weather_home";
 import '../App.css';
 import {Link} from 'react-router-dom';
 import Advice from "../components/advice";
-import {sampleWeather} from "../assets/sample-weather";
 import SmallWeather from "../components/small-weather";
 import {sampleForecast} from "../assets/sample-weather";
 import {api} from '../App';
 
 
-// temporary variable that prevents api from sending too many requests
-// only for debugging purposes
-var count = 0;
-
-// main component of the home screen
+// home screen
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        // we only need to store
         this.state = {
-            // there is a sampleWeather JSON to load be default to ensure smooth functioning
-            // and so that the app shows something even if we fail to load from api
-            weather: sampleWeather,
+            // only requires forecast since weather is kept by the app
             forecast: sampleForecast.list,
         }
     }
-
-    // queries the open-weather api and updates the components state to the
-    // current weather
-    fetchWeather() {
-        console.log("fetch called!");
-        count++;
-        if( count < 20) {
-            const url = api.base + this.props.location + "&units=metric&APPID=" + api.apikey;
-            console.log(url);
-            $.ajax({
-                url: url,
-                dataType: "json",
-                success: this.updateWeatherHome,
-                error: this.locationNotFound
-            });
-        }
-    };
-
-    // updates component's state to the given weather json
-    updateWeatherHome = (data) => {
-        console.log(this);
-        console.log(this.props.location);
-        this.setState({
-            weather: data,
-        });
-    };
-
-    locationNotFound = (error) => {
-        console.log(error.responseText);
-        const response = JSON.parse(error.responseText);
-        if(response.cod === "404") {
-            this.props.changeLocation("Location not found or not supported");
-            console.log(this.props.location)
-        }
-    };
 
     //fetch the 5 day forecast
     fetchForecast() {
@@ -73,72 +30,55 @@ export default class Home extends React.Component {
             url: url,
             dataType: "json",
             success: this.updateForecast,
+            error: this.noForecast,
         });
     };
 
+    // set forecast to current forecast
     updateForecast = (data) => {
-        console.log(data.list);
         this.setState({
             forecast: data.list,
         });
     };
 
+    // weather home won't load if we ever get an error here, and it displays appropriate message
+    noForecast = (data) => {
+        console.log("failed to fetch forecast");
+        console.log(data);
+    };
 
-    //this functions loads
-    // as soon as the component loads, right when it loads, we fetch the weather
+    // this functions loads as soon as the component loads
     componentDidMount() {
-        //this.fetchWeather();
         this.props.fetchWeather();
         this.fetchForecast();
     };
 
-    // helper function that renders the components that displays the weather
-    renderWeatherHome() {
-      //  const temp = this.state.temp;
-      //  const conditions = this.state.conditions;
-        const weather = this.props.weather; //this.state.weather;
-        return (
-            <WeatherHome
-                weather = {weather}
-            />
-        );
-    };
+    render() {
+        console.log('rendering home');
 
-    // helper funcions that renders the components that recommends the walk
-    renderRecommend() {
         const weatherNow = this.props.weather;
         const theSize = this.props.size;
         const theBreed = this.props.breed;
         const forecast = this.state.forecast;
-        return(
-            <Advice
-                weather={weatherNow}
-                size={theSize}
-                breed={theBreed}
-                forecast={forecast}
-                zoneOffset={weatherNow.timezone}
-            />
-            );
-    };
 
-    render() {
-        console.log('rendering app2 ' + this.props.breed);
-        const weatherNow = this.props.weather;
-        console.log(this.state);
+        // the app switches to dark mode automatically if the weather/ time is appropriate
         this.props.setDark(isDark(weatherNow));
+
         return (
             <div className={(weatherNow != null)
                 ? ((!isDark(weatherNow)) ? 'App Clear' : 'App') : 'App'}>
                 <main>
                     <div className="weather-box">
-                      
+
                         <Link to="/config">
-                            <button type="button" className={isDark(weatherNow) ? 'Button3 Dark' : "Button3"}>Change Breed/Location</button>
+                            <button type="button" className={isDark(weatherNow) ? 'Button3 Dark' : "Button3"}>
+                                Change Breed/Location
+                            </button>
                         </Link>
 
-                        {this.renderWeatherHome()}
-                        <div className="dog-box">
+                        <WeatherHome weather = {weatherNow}/>
 
+                        <div className="dog-box">
                             <h5>Dog breed:</h5>
                             <h3>
                                 {this.props.breed} <br/>
@@ -152,21 +92,27 @@ export default class Home extends React.Component {
                             sunRise={weatherNow.sys.sunrise + weatherNow.timezone}
                             zoneOffset={weatherNow.timezone}
                         />
-                        <div>
-                            {this.renderRecommend()}
-                        </div>
+
+                        <Advice
+                            weather={weatherNow}
+                            size={theSize}
+                            breed={theBreed}
+                            forecast={forecast}
+                            zoneOffset={weatherNow.timezone}
+                        />
+
                     </div>
                 </main>
             </div>
         );
     }
-
 }
 
+//helpers:
+
+// checks whether the app should be in dark mode
 function isDark(weatherData) {
-    //const localTime = weatherData.dt + weatherData.timezone;
     if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
- //   if(!(weatherData.dt > weatherData.sys.sunset)) {
         return true;
     }
     const main = weatherData.weather[0].main;

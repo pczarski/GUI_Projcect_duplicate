@@ -4,6 +4,7 @@ import {breeds} from "../assets/breeds.js";
 
 export default class Select extends React.Component {
 
+    // we keep states as we don't want to re-render the entire app until the user confirms selection
     constructor(props) {
         super(props);
         this.state = {
@@ -20,6 +21,7 @@ export default class Select extends React.Component {
         this.state.size = e.options[e.selectedIndex].value;
     };
 
+    // called when user confirms selection
     updateDog() {
         this.props.changeBreed(this.state.breed);
         this.props.changeSize(this.state.size);
@@ -35,16 +37,17 @@ export default class Select extends React.Component {
     };
 
     render() {
-        // map supported dog breeds onto html tag
-        const renderedBreeds = breeds.map((breed) => {
+
+        // map supported dog breeds onto html elements
+        const renderedBreeds = breeds.map((breed, index) => {
             return (
-                <option value={breed.size}>{breed.breed}</option>
+                <option value={breed.size} key={index}>{breed.breed}</option>
             );
         });
 
         return (
             <div >
-                <label >Select your breed </label><br></br>
+                <label >Select your breed </label><br/>
                 <select id="dropdown" onChange={() => this.handleSelect()}
                         className={(this.props.isDark) ? "Select Dark" : "Select"}
                         onClick={this.removeMessage}
