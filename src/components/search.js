@@ -1,14 +1,19 @@
-// TODO: make the home screen weather display here
-import React, {useState} from 'react';
+import React from 'react';
 import $ from 'jquery';
+import {api} from "../App";
 
 export default class Search extends React.Component {
+
+    /*
+    * the reason we keep states here and pass the query to parent
+    * is because we don't want to call fetch weather for every character user types
+     */
     constructor(props) {
         super(props);
         this.state = {
             query: "",
-            message: "",
-            error: false,
+            message: "", // saved or an error
+            error: false, // for changing styles of the error message
         };
     }
 
@@ -19,32 +24,47 @@ export default class Search extends React.Component {
         });
     };
 
-    // passes the query the the given function
-    sendQuery(){
-        this.props.onSubmit(this.state.query);
+    // handle saving
+    handleQuery(){
         this.checkLocation(this.state.query);
     };
 
+    /*
+    Send query to check if location exists. Update the state accordingly.
+    The reason for not using fetchWeather() from App.js is
+    that we do not want to change the location if it is not supported/ doesn't exist.
+     */
     checkLocation(location) {
         $.ajax({
-            url: "https://api.openweathermap.org/data/2.5/weather?q="+location+"&APPID=5890b051c398fd53af1e1a449157b1de",
+            url: api.forecastBase+location+"&APPID="+api.apikey,
             success: this.locationSuccess,
             error: this.locationError,
         })
     };
 
+    // update location if success
     locationSuccess = ()  => {
+        this.props.onSubmit(this.state.query);
         this.setState({
             message: "Saved!",
             error: false,
-        })
+        });
     };
 
-    locationError = () => {
-        this.setState({
-            message: "Could not find: " + this.state.query,
-            error: true,
-        })
+    // do not update location on error
+    locationError = (error) => {
+        const response = JSON.parse(error.responseText);
+        if(response.cod === "404") {
+            this.setState({
+                message: "Could not find: " + this.state.query,
+                error: true,
+            });
+        }
+        else {
+            this.setState({
+                message: "Unexpected error occurred. Try to open the app again, if the problem persist please report the issue.",
+            })
+        }
     };
 
     removeMessage = () => {
@@ -66,12 +86,11 @@ export default class Search extends React.Component {
                         value={this.state.query}
                         onClick = {this.removeMessage}
                     />
-                    <button type="button" onClick = {() => this.sendQuery()} className={(this.props.isDark) ?"Button2 Dark" : "Button2"}>
+                    <button type="button" onClick = {() => this.handleQuery()} className={(this.props.isDark) ? "Button2 Dark" : "Button2"}>
                         save
                     </button>
                     <span id="message" className={this.state.error ? "message error" : "message"}> {this.state.message}</span>
                 </form>
-
             </div>
         )
     }

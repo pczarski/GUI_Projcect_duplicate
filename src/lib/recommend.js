@@ -1,39 +1,34 @@
-
-//parses the forecast data and returns only today's forecast with only the info needed
+//parses the forecast data and returns only today's forecast with only the info needed to generate the advice
 function getForecastInfo(forecasts, timezone) {
     let todayForecast = [];
     let today = new Date().getDate();
 
     for(let i = 0; i < forecasts.length; i++) {
         const day = parseInt(forecasts[i].dt_txt.substring(8,10));
-        console.log(day);
-        console.log(today);
         if(day != today){
             return todayForecast;
         }
         const date = new Date((forecasts[i].dt + timezone) * 1000);
         todayForecast.push({
-            //"time":forecasts[i].dt_txt.substring(11),
             "time": prefix0(date.getHours())+":"+prefix0(date.getMinutes()),
             "id":forecasts[i].weather[0].id,
             "main":forecasts[i].weather[0].main,
             "description":forecasts[i].weather[0].description,
             "icon": forecasts[i].weather[0].icon,
         });
-        console.log(todayForecast);
     }
     return todayForecast;
 }
 
-
+// generates the advice based on the forecast
 export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) {
 
     // use forecast info the generate advice for walk time and place
     const forecastInfo = getForecastInfo(forecast, timezone);
-    console.log(forecastInfo);
+    // console.log(forecastInfo);
   
-    let msg=""
-    let walkieTimes = new Array();
+    let msg="";
+    let walkieTimes = [];
     for( let i=0; i < forecastInfo.length;i++)
     {
         if(forecastInfo[i].id >=800 && forecastInfo[i].id <900)
@@ -42,7 +37,7 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) 
         }
     }
 
-    if(walkieTimes.length == 0 && forecastInfo.length != 0){
+    if(walkieTimes.length === 0 && forecastInfo.length !== 0){
         if(forecastInfo[0].id >=200 && forecastInfo[0].id < 600)
         {
             msg += "It is going to be raining the entire day. Please avoid grassy and muddy areas. "
@@ -52,22 +47,22 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) 
             msg += "It is going to be snowing the entire day. Please be cautious around ice so you dont slip and hurt yourself. "
         }
     }
-    else if(walkieTimes.length == 1){
+    else if(walkieTimes.length === 1){
         msg += "The best time to go for a walk today is "+ walkieTimes[0] + ". ";
     }
-    else if(walkieTimes.length == forecastInfo.length){
+    else if(walkieTimes.length === forecastInfo.length){
         msg += "Todays weather will be nice enough to go for a walk at any time. ";        
     }
     else {
-        let times = " "
+        let times = " ";
         for( let x=0; x<walkieTimes.length;x++){
-            if(x==(walkieTimes.length-1)){
+            if(x===(walkieTimes.length-1)){
                 times += walkieTimes[x] + ". "
             }
-            else if(x==(walkieTimes.length-2)){
+            else if(x===(walkieTimes.length-2)){
                 times += walkieTimes[x] + " and "
             }
-            else if(x==(walkieTimes.length-2)){
+            else if(x===(walkieTimes.length-2)){
                 times += walkieTimes[x] + " , "
             }
         }
@@ -97,9 +92,9 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) 
 
         }else if (desc === "Clouds" ) {
             if (degrees < -10 ){
-                return msg +"The day appears cloudy and extremely cold.Please ensure that your " + breed +" is covered perfectly to be able to keep warm in this environment. The recommended duration for the walk is 30 minutes though not advisable."
+                return msg +"The day appears cloudy and extremely cold. Please ensure that your " + breed +" is covered perfectly to be able to keep warm in this environment. The recommended duration for the walk is 30 minutes though not advisable."
             }else if( degrees > -10 && degrees <= 0 ) {
-                return msg +"The day appears cloudy and very cold.Please ensure that you and your " + breed +" are outfitted with warm clothing before going out.The recommended duration for the walk is 40 minutes."
+                return msg +"The day appears cloudy and very cold. Please ensure that you and your " + breed +" are outfitted with warm clothing before going out.The recommended duration for the walk is 40 minutes."
             }else if( degrees > 0 && degrees <= 10 ) {
                 return msg +"The day appears cloudy and  cold. Please ensure you are dressed appropriately and head home when you think your " + breed +" is cold. The recommended duration for the walk is 50 minutes."
             }else if( degrees > 10 && degrees <= 20 ) {
@@ -304,6 +299,9 @@ export function generateAdvice(degrees, desc, dSize, breed, forecast, timezone) 
     }
 }
 
+// helpers:
+
+// not importing from helpers.js since libs shouldn't be coupled
 function prefix0(dateInt) {
     if(dateInt <= 9) {
         return "0" + dateInt;

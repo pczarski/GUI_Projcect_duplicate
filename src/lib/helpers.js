@@ -1,4 +1,4 @@
-export function getHours(dateInt) {
+export function prefix0(dateInt) {
     if(dateInt <= 9) {
         return "0" + dateInt;
     }

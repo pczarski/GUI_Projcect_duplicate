@@ -1,20 +1,19 @@
 import React from "react";
 import {generateAdvice} from "../lib/recommend";
 
-// component that renders the walk recommendation
-export default class WalkNow extends React.Component{
-    render() {
-        const weather = this.props.weather;
-        const forecast = this.props.forecast;
-        const timezone = this.props.zoneOffset;
-        if(weather != null){
-            console.log(this.props.size);
+// function component that renders the walk recommendation
+export default function Advice(props) {
+        const weather = props.weather;
+        const forecast = props.forecast;
+        const timezone = props.zoneOffset;
 
+        // don't render if location not set
+        if(weather != null){
             const advice = generateAdvice(
                 Math.round(weather.main.temp),
                 weather.weather[0].main,
-                this.props.size,
-                this.props.breed,
+                props.size,
+                props.breed,
                 forecast,
                 timezone,
             );
@@ -25,7 +24,5 @@ export default class WalkNow extends React.Component{
                 </div>
             );
         }
-        return ("");
-
-    }
+        return("");
 }

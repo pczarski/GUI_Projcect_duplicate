@@ -1,51 +1,46 @@
 // TODO: make the home screen weather display here
 import React from 'react';
+import {prefix0} from '../lib/helpers.js';
 
-// weather home component
-export default class WeatherHome extends React.Component {
-    render() {
-        if(this.props.weather == null){
-            return("");
-        }
-        //const today = new Date();
-        const today = convertZones(this.props.weather);
-        const temperature = this.props.weather.main.temp;
-        const weatherDescription = this.props.weather.weather[0].description;
-        return(
+// function component to display the main information on the home screen
+export default function WeatherHome(props) {
+
+    // don't render if weather not fetched
+    if(props.weather == null){
+        return("");
+    }
+
+    const today = convertZones(props.weather);
+    const temperature = props.weather.main.temp;
+    const weatherDescription = props.weather.weather[0].description;
+
+    return(
+        <div>
             <div>
-                <div>
-                    <div className="location-box">
-                        <div className="location">{this.props.weather.name}, {this.props.weather.sys.country}</div>
-                        <div className="time">
-                            {getHours(today.getHours())+ ':' + getHours(today.getMinutes())}
-                        </div>
-                        <div className="date">
-                            {today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()}
-                        </div>
+                <div className="location-box">
+                    <div className="location">{props.weather.name}, {props.weather.sys.country}</div>
+                    <div className="time">
+                        {prefix0(today.getHours())+ ':' + prefix0(today.getMinutes())}
                     </div>
-                    <div className="weather-box">
-                        <div className="temp">
-                            {Math.round(temperature)}°C
-                        </div>
-                        <div className="weather">
-                            {weatherDescription}</div>
+                    <div className="date">
+                        {prefix0(today.getDate())+'-'+prefix0((today.getMonth()+1))+'-'+today.getFullYear()}
                     </div>
                 </div>
+                <div className="weather-box">
+                    <div className="temp">
+                        {Math.round(temperature)}°C
+                    </div>
+                    <div className="weather">
+                        {weatherDescription}</div>
+                </div>
             </div>
-
-        );
-    }
+        </div>
+    );
 }
 
+// helpers
 
 function convertZones(weatherData) {
     const localTime = weatherData.dt + weatherData.timezone;
     return new Date(localTime * 1000);
-}
-
-function getHours(dateInt) {
-    if(dateInt <= 9) {
-        return "0" + dateInt;
-    }
-    return dateInt;
 }
