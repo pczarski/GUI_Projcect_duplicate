@@ -1,19 +1,14 @@
 import React from "react";
 import $ from 'jquery';
-import WeatherHome from "./components/weather_home";
-import './App.css';
-import Search from "./components/search";
+import WeatherHome from "../components/weather_home";
+import '../App.css';
 import {Link} from 'react-router-dom';
-import WalkNow from "./components/walk-now";
-import {sampleWeather} from "./assets/sample-weather";
-import SmallWeather from "./components/small-weather";
-import {sampleForecast} from "./assets/sample-weather";
-import {api} from './App';
-// const api= {
-//     apikey: "5890b051c398fd53af1e1a449157b1de",
-//     base: "https://api.openweathermap.org/data/2.5/weather?q=",
-//     forecastBase: "https://api.openweathermap.org/data/2.5/forecast?q=",
-// };
+import Advice from "../components/advice";
+import {sampleWeather} from "../assets/sample-weather";
+import SmallWeather from "../components/small-weather";
+import {sampleForecast} from "../assets/sample-weather";
+import {api} from '../App';
+
 
 // temporary variable that prevents api from sending too many requests
 // only for debugging purposes
@@ -116,7 +111,7 @@ export default class Home extends React.Component {
         const theBreed = this.props.breed;
         const forecast = this.state.forecast;
         return(
-            <WalkNow
+            <Advice
                 weather={weatherNow}
                 size={theSize}
                 breed={theBreed}

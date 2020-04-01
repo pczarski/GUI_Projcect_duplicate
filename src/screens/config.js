@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import Search from "./components/search";
-import Select from "./components/select";
+import Search from "../components/search";
+import Select from "../components/select";
 import "./config.css";
 
 // config page. It reuses the search.

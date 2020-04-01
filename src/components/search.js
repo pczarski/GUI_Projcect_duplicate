@@ -1,6 +1,6 @@
-// TODO: make the home screen weather display here
 import React from 'react';
 import $ from 'jquery';
+import {api} from "../App";
 
 export default class Search extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ export default class Search extends React.Component {
      */
     checkLocation(location) {
         $.ajax({
-            url: "https://api.openweathermap.org/data/2.5/weather?q="+location+"&APPID=5890b051c398fd53af1e1a449157b1de",
+            url: api.forecastBase+location+"&APPID="+api.apikey,
             success: this.locationSuccess,
             error: this.locationError,
         })

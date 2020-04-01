@@ -4,27 +4,34 @@
   box-sizing: border-box;
 }
 
+/* fonts */
 @font-face {
   font-family: 'Roboto-Regular';
-  src: url('lib/fonts/Roboto-Regular.ttf');
+  src: url('assets/fonts/Roboto-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Roboto-italic';
-  src: url('lib/fonts/Roboto-Italic.ttf');
+  src: url('assets/fonts/Roboto-Italic.ttf');
 }
 
 @font-face {
   font-family: 'Roboto-LightItalic';
-  src: url('lib/fonts/Roboto-LightItalic.ttf');
+  src: url('assets/fonts/Roboto-LightItalic.ttf');
 }
 
-
+/* general */
 body {
   font-family: 'Roboto-Regular';
 
 }
 
+main {
+  min-height: 100vh;
+  padding: 25px;
+}
+
+/* classes */
 .App {
   background-color:#363636;
   color: #ffffff;
@@ -36,11 +43,6 @@ body {
 .App.Clear {
   color:#080712;
   background-color:#eceff1;
-}
-
-main {
-  min-height: 100vh;
-  padding: 25px;
 }
 
 .search-box {
@@ -64,7 +66,7 @@ main {
 }
 
 .search-box .search-bar:focus {
-  background-color: (255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .searchDark {

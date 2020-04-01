@@ -1,3 +1,4 @@
+// dog breed data
 export const breeds = [
     {'breed': 'Golden Retriever', 'size': 'Large'},
     {'breed': 'German Shepherd', 'size': 'Large'},

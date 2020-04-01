@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Home from "./home";
-import Config from "./config";
+import Home from "./screens/home";
+import Config from "./screens/config";
 import {sampleWeather} from "./assets/sample-weather";
 import $ from "jquery";
 

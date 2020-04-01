@@ -5,13 +5,16 @@ import Sun from "../assets/thsun.png";
 import Rain from "../assets/rain.png";
 import Moon from "../assets/moon.png";
 import NightCloud from "../assets/cloud-night.png";
-import {prefix0} from "../lib/lib";
+import {prefix0} from "../lib/helpers";
 
-// component
-export default function SmallWeather(props) {//extends React.Component{
+// function component that renders the available forecasts
+// requires the list of forecasts, zoneOffset, sunSet, sunRise
+export default function SmallWeather(props) {
 
+    // function used to map single forecast onto html element
     const renderForecastPoint = (foreCastPoint) => {
-        if(foreCastPoint.main){ // only render the point if it exists (there were no errors)
+        // only render the point if it exists (there were no errors)
+        if(foreCastPoint.main){
             const temperature = foreCastPoint.main.temp;
             const main = foreCastPoint.weather[0].main;
             const date = new Date((foreCastPoint.dt + props.zoneOffset)*1000);
@@ -35,7 +38,7 @@ export default function SmallWeather(props) {//extends React.Component{
             }
 
             return (
-                <div className="card--content">
+                <div className="card-content">
                     <img src={src} alt={alt}/>
                     <h4>
                         {Math.round(temperature)}°C
@@ -51,19 +54,20 @@ export default function SmallWeather(props) {//extends React.Component{
 
     };
 
-//    render() {
-        const forecasts = props.forecast;
-        console.log(forecasts);
-        const renderForecasts = forecasts.map(point => renderForecastPoint(point));
-        return (
-            <div>
-                <section className="card">
-                    {renderForecasts}
-                </section>
-            </div>
-        );
- //   };
+    const forecasts = props.forecast;
+
+    // map the forecasts
+    const renderForecasts = forecasts.map(point => renderForecastPoint(point));
+    return (
+        <div>
+            <section className="card">
+                {renderForecasts}
+            </section>
+        </div>
+    );
 }
+
+// helpers:
 
 function isNight(time, sunset, sunrise) {
     const rise = new Date(sunrise * 1000).getHours();
