@@ -18,6 +18,7 @@ export default function SmallWeather(props) {
             const temperature = foreCastPoint.main.temp;
             const main = foreCastPoint.weather[0].main;
             const date = new Date((foreCastPoint.dt + props.zoneOffset)*1000);
+            console.log("point ----" + date.getHours() + " "+ isNight(foreCastPoint.dt + props.zoneOffset, props.sunSet, props.sunRise));
 
             // select appropriate icon
             let src = Sun;
@@ -32,7 +33,7 @@ export default function SmallWeather(props) {
                 src = Cloud;
                 alt = "cloud";
             }
-            else if (isNight(foreCastPoint, props.sunSet, props.sunRise)) {
+            else if (isNight(foreCastPoint.dt + props.zoneOffset, props.sunSet, props.sunRise)) {
                 src = Moon;
                 alt = "night"
             }
