@@ -60,18 +60,16 @@ export default class Home extends React.Component {
         const theSize = this.props.size;
         const theBreed = this.props.breed;
         const forecast = this.state.forecast;
-
-        // the app switches to dark mode automatically if the weather/ time is appropriate
-        this.props.setDark(isDark(weatherNow));
+        const isDark = this.props.isDark;
 
         return (
             <div className={(weatherNow != null)
-                ? ((!isDark(weatherNow)) ? 'App Clear' : 'App') : 'App'}>
+                ? ((!isDark) ? 'App Clear' : 'App') : 'App'}>
                 <main>
                     <div className="weather-box">
 
                         <Link to="/config">
-                            <button type="button" className={isDark(weatherNow) ? 'Button3 Dark' : "Button3"}>
+                            <button type="button" className={isDark ? 'Button3 Dark' : "Button3"}>
                                 Change Breed/Location
                             </button>
                         </Link>
@@ -106,19 +104,4 @@ export default class Home extends React.Component {
             </div>
         );
     }
-}
-
-//helpers:
-
-// checks whether the app should be in dark mode
-function isDark(weatherData) {
-    if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
-        return true;
-    }
-    const main = weatherData.weather[0].main;
-    if(main === "Rain" || main === "Thunderstorm") {
-        return true;
-    }
-    const code = weatherData.weather[0].id;
-    return [602, 616, 621, 622, 804].includes(code);
 }

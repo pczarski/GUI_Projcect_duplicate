@@ -31,9 +31,14 @@ export default function App()  {
         $.ajax({
             url: url,
             dataType: "json",
-            success: setWeather,
+            success: updateWeather,
             error: locationNotFound,
         });
+    };
+
+    const updateWeather = (data) => {
+        setWeather(data);
+        setDark(isDark(data))
     };
 
     // in case unexpected error occurs.
@@ -67,6 +72,7 @@ export default function App()  {
                             updateWeather = {setWeather}
                             fetchWeather = {fetchWeather}
                             weather = {weather}
+                            isDark = {dark}
                             />
                         }
                     />
@@ -92,5 +98,19 @@ export default function App()  {
             </div>
         </Router>
     );
+}
 
+//helpers:
+
+// checks whether the app should be in dark mode
+function isDark(weatherData) {
+    if(!(weatherData.sys.sunrise < weatherData.dt && weatherData.dt < weatherData.sys.sunset)) {
+        return true;
+    }
+    const main = weatherData.weather[0].main;
+    if(main === "Rain" || main === "Thunderstorm") {
+        return true;
+    }
+    const code = weatherData.weather[0].id;
+    return [602, 616, 621, 622, 804].includes(code);
 }
